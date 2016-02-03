@@ -2,7 +2,9 @@
 require 'lib/autoload.php';
 
   $db = DBFactory::getMysqlConnectionWithPDO();
-  $manager = new ArticleManagerPDO($db);
+  $ArticleManager = new ArticleManagerPDO($db);
+  $AuthorManager = new AuthorManagerPDO($db);
+  $CommentManager = new CommentManagerPDO($db);
 ?>
 
 <!DOCTYPE html>
@@ -32,26 +34,33 @@ require 'lib/autoload.php';
   <div class="row">
     <div class="col s12 m6">
           <?php
-          foreach ($manager->getList(0, 5) as $articles => $article) {
+          foreach ($ArticleManager->getList(0, 5) as $articles => $article) {
+            $author = $AuthorManager->getUnique($article->getAuthorId());
+            //$comments = $CommentManager->getByArticleId($article->getArticleId());
             ?>
             <div class="card blue-grey darken-1 z-depth-2">
               <div class="card-content white-text">
                 <span class="card-title"><?php print_r($article->getTitle()); ?></span>
-                <p><?php print_r($article->getContent()); ?></p>
+                <p><?php print_r($article->getContent());?></p>
               </div>
               <div class="card-action">
                 <div class="chip" style="margin-right:20px">
-                  
+                  <?php
+                  print_r($author->getUsername().' ');
+                  print_r($article->getPostTimestamp().' ');
+                  if (!strtotime($article->getEditTimestamp()) == 0) print_r('Edit at '.$article->getEditTimestamp());
+                  ?>
                 </div>
                 <!-- Modal Trigger -->
                 <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
-
+                  <?php print_r($CommentManager->countById($article->getArticleId())); ?>
                 </a>
 
                 <!-- Modal Structure -->
                 <div id="modal1" class="modal bottom-sheet">
                   <div class="modal-content">
-
+                    <h5></h5>
+                    <p></p>
                   </div>
                   <div class="modal-footer">
                     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>

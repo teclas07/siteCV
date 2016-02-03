@@ -7,10 +7,9 @@ class ArticleManagerPDO extends ArticleManager
     $this->db = $db;
   }
 
-
   protected function add(Article $article)
   {
-    $query = $this->db->prepare('INSERT INTO article SET author_id = :author_id, title = :title, content = :content, post_timestamp = NOW(), edit_timestamp = NOW()');
+    $query = $this->db->prepare('INSERT INTO article SET author_id = :author_id, title = :title, content = :content, post_timestamp = NOW()');
 
     $query->bindValue(':title', $article->title());
     $query->bindValue(':author_id', $article->author_id());
@@ -45,12 +44,6 @@ class ArticleManagerPDO extends ArticleManager
 
     $listeArticle = $query->fetchAll();
 
-    foreach ($listeArticle as $article)
-    {
-      $article->setPostTimestamp(new DateTime($article->getPostTimestamp()));
-      $article->setEditTimestamp(new DateTime($article->getEditTimestamp()));
-    }
-
     $query->closeCursor();
 
     return $listeArticle;
@@ -65,9 +58,6 @@ class ArticleManagerPDO extends ArticleManager
     $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Article');
 
     $article = $query->fetch();
-
-    $article->setPostTimestamp(new DateTime($article->post_timestamp()));
-    $article->setEditTimestamp(new DateTime($article->edit_timestamp()));
 
     return $article;
   }

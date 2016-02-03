@@ -1,6 +1,6 @@
 <?php
 	class Article {
-		public $errors = [],
+		protected $errors = [],
 							$artilce_id,
 							$title,
 							$content,

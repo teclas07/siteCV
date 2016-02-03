@@ -1,23 +1,31 @@
 <?php
   class Author {
-    var $toto;
-    var $tata;
     protected $author_id,
               $username,
               $password,
               $biography,
               $error = [];
 
-    const INVALID_PASSWORD;
-    const INVALID_USERNAME;
+    const INVALID_PASSWORD = 1;
+    const INVALID_USERNAME = 2;
 
-    public function __constructor() {
+    public function __constructor($valors = []) {
+			if (!empty($valors)) {
+				$this->hydrate($valor);
+			}
+		}
 
-    }
+		public function hydrate($datas) {
+			foreach ($datas as $attribut => $valor)
+			{
+				$methode = 'set'.ucfirst($attribut);
 
-    public function setAuthorId($authorId) {
-      $this->author_id = $authorId;
-    }
+				if (is_callable([$this, $methode]))
+				{
+					$this->$methode($valor);
+				}
+			}
+		}
 
     public function setUsername($username) {
       if (!is_string($username) || empty($username)) {
