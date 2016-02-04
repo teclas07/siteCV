@@ -53,7 +53,7 @@ require 'lib/autoload.php';
                 </div>
                 <!-- Modal Trigger -->
                 <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
-                  <?php print_r($CommentManager->countById($article->getArticleId())); ?>
+                  
                 </a>
 
                 <!-- Modal Structure -->
