@@ -11,9 +11,9 @@ class ArticleManagerPDO extends ArticleManager
   {
     $query = $this->db->prepare('INSERT INTO article SET author_id = :author_id, title = :title, content = :content, post_timestamp = NOW()');
 
-    $query->bindValue(':title', $article->title());
-    $query->bindValue(':author_id', $article->author_id());
-    $query->bindValue(':content', $article->content());
+    $query->bindValue(':title', $article->getTitle());
+    $query->bindValue(':author_id', $article->getAuthorId());
+    $query->bindValue(':content', $article->getContent());
 
     $query->execute();
   }
@@ -66,10 +66,10 @@ class ArticleManagerPDO extends ArticleManager
   {
     $query = $this->db->prepare('UPDATE article SET author_id = :author_id, title = :title, content = :content, edit_timestamp = NOW() WHERE article_id = :article_id');
 
-    $query->bindValue(':title', $article->title());
-    $query->bindValue(':author_id', $article->author_id());
-    $query->bindValue(':content', $article->content());
-    $query->bindValue(':article_id', $article->article_id(), PDO::PARAM_INT);
+    $query->bindValue(':title', $article->getTitle());
+    $query->bindValue(':author_id', $article->getAuthorId());
+    $query->bindValue(':content', $article->getContent());
+    $query->bindValue(':article_id', $article->getArticleId(), PDO::PARAM_INT);
 
     $query->execute();
   }

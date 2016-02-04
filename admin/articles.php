@@ -5,17 +5,32 @@ require '../lib/autoload.php';
   $db = DBFactory::getMysqlConnectionWithPDO();
   $ArticleManager = new ArticleManagerPDO($db);
   $AuthorManager = new AuthorManagerPDO($db);
+  $article = new Article();
 
   if (isset($_GET['delete'])) {
     $ArticleManager->delete($_GET['delete']);
   }
-  if (isset($_GET['add'])) {
-    $article = new Article();
 
-    $article->setTitle();
-    $article->setContent();
+  if (isset($_POST['add'])) {
+    $article->setTitle($_POST['title']);
+    $article->setContent($_POST['content']);
+    $article->setAuthorId(1);
+    $article->setAuthorId(1);
 
-    $articleManager->add($article);
+    try {
+      $ArticleManager->save($article);
+    } catch (Exception $e) {
+      echo($e->getMessage());
+    }
+  }
+
+  if (isset($_POST['edit'])) {
+    $article = $ArticleManager->getUnique($_POST['edit']);
+    if (empty($article->getErrors())) {
+      $ArticleManager->save($article);
+    } else {
+      echo($article->getErrors());
+    }
   }
 ?>
 <!DOCTYPE html>
@@ -38,6 +53,7 @@ require '../lib/autoload.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 
   <main>
+    <a href="add-article.php" class="waves-effect waves-light btn">Add article</a>
     <table>
         <thead>
           <tr>
@@ -64,7 +80,7 @@ require '../lib/autoload.php';
             <td><?php print_r($article->getEditTimestamp());?></td>
             <td><?php print_r($author->getUsername());?></td>
             <td>news</td>
-            <td><a class="waves-effect waves-light btn">Edit</a></td>
+            <td><form action="add-article.php"><button class="waves-effect waves-light btn" name="edit" value="<?php print_r($article->getArticleId());?>">Edit</button></form></td>
             <td><form action="articles.php"><button class="waves-effect waves-light btn" name="delete" value="<?php print_r($article->getArticleId());?>">Delete</button></form></td>
           </tr>
           <?php

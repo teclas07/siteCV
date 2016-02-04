@@ -3,8 +3,8 @@ require '../lib/autoload.php';
 
   $db = DBFactory::getMysqlConnectionWithPDO();
   $ArticleManager = new ArticleManagerPDO($db);
-
   $article = new Article();
+
   if(isset($_GET['edit'])) {
     $article = $ArticleManager->getUnique($_GET['edit']);
   }
@@ -34,7 +34,7 @@ require '../lib/autoload.php';
       <form class="col s12" action="articles.php" method="post">
         <div class="row">
           <div class="input-field col s6">
-            <input id="title" type="text" class="validate" value="<?php print_r($article->getTitle());?>">
+            <input id="title" name="title" type="text" class="validate" value="<?php print_r($article->getTitle());?>">
             <label for="title">Title</label>
           </div>
         </div>
@@ -46,7 +46,7 @@ require '../lib/autoload.php';
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <button type="submit" class="waves-effect waves-light btn">Enregistrer</button>
+            <button type="submit" class="waves-effect waves-light btn" name="<?php isset($_GET['edit']) ? print_r('edit'): print_r('add') ?>" value="<?php print_r($article->getArticleId());?>">Enregistrer</button>
           </div>
         </div>
       </form>

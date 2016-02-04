@@ -1,7 +1,7 @@
 <?php
 	class Article {
 		protected $errors = [],
-							$artilce_id,
+							$article_id,
 							$title,
 							$content,
 							$post_timestamp,
@@ -32,6 +32,14 @@
 			}
 		}
 
+		public function isnew() {
+			return empty($this->article_id);
+		}
+
+		public function isValid() {
+			return !(empty($this->author_id) || empty($this->title) || empty($this->content));
+		}
+
 		public function setArticleId($artilceId) {
 			$this->article_id = (int) $articleId;
 		}
@@ -60,6 +68,10 @@
 			$this->edit_timestamp = $editTimespam;
 		}
 
+		public function setCategoryId($categoryId) {
+			$this->category_id = $categoryId;
+		}
+
 		public function setAuthorId($authorId) {
 			$this->author_id = $authorId;
 		}
@@ -86,6 +98,10 @@
 
 		public function getEditTimestamp() {
 			return $this->edit_timestamp;
+		}
+
+		public function getCategoryId() {
+			return $this->category_id;
 		}
 
 		public function getAuthorId() {
