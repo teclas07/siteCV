@@ -65,7 +65,7 @@ require '../lib/autoload.php';
             <td><?php print_r($author->getUsername());?></td>
             <td>news</td>
             <td><a class="waves-effect waves-light btn">Edit</a></td>
-            <td><form action="article.php"><button class="waves-effect waves-light btn" name="delete" value="<?php print_r($article->getArticleId());?>">Delete</button></form></td>
+            <td><form action="articles.php"><button class="waves-effect waves-light btn" name="delete" value="<?php print_r($article->getArticleId());?>">Delete</button></form></td>
           </tr>
           <?php
           }
