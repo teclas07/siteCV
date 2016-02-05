@@ -24,11 +24,6 @@ class CommentManagerPDO extends CommentManager
     return $this->db->query('SELECT COUNT(*) FROM comment')->fetchColumn();
   }
 
-  public function countById($article_id)
-  {
-    return $this->db->query('SELECT COUNT(*) FROM comment WHERE article_id = '.$article_id)->fetchColumn();
-  }
-
   public function delete($comment_id)
   {
     $this->db->exec('DELETE FROM comment WHERE comment_id = '.(int) $comment_id);
@@ -54,9 +49,15 @@ class CommentManagerPDO extends CommentManager
     return $listeComment;
   }
 
-  public function getAll()
+  public function getListByArticleId($begin = -1, $limit = -1, $articleId)
   {
-    $sql = 'SELECT comment_id, article_id, user_id, content, post_timestamp, edit_timestamp FROM comment ORDER BY comment_id DESC';
+    $sql = 'SELECT article_id, comment_id, user_id, content, post_timestamp, edit_timestamp FROM comment WHERE article_id = '.$articleId.' ORDER BY comment_id DESC';
+
+
+    if ($begin != -1 || $limit != -1)
+    {
+      $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $begin;
+    }
 
     $query = $this->db->query($sql);
     $test = $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
@@ -68,10 +69,11 @@ class CommentManagerPDO extends CommentManager
     return $listeComment;
   }
 
-  public function getByArticleId($articleId) {
-    $query = $this->db->prepare('SELECT comment_id, article_id, user_id, content, post_timestamp, edit_timestamp FROM comment WHERE article_id =:article_id ORDER BY comment_id DESC');
+  public function getAll()
+  {
+    $sql = 'SELECT comment_id, article_id, user_id, content, post_timestamp, edit_timestamp FROM comment ORDER BY comment_id DESC';
 
-    $query->bindValue(':article_id', $articleId);
+    $query = $this->db->query($sql);
     $test = $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
 
     $listeComment = $query->fetchAll();

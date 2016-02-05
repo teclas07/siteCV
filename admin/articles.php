@@ -1,4 +1,3 @@
-
 <?php
 require '../lib/autoload.php';
 
@@ -21,15 +20,19 @@ require '../lib/autoload.php';
       $ArticleManager->save($article);
     } catch (Exception $e) {
       echo($e->getMessage());
+    } finally {
+      $_POST['add'] == null;
     }
   }
 
   if (isset($_POST['edit'])) {
     $article = $ArticleManager->getUnique($_POST['edit']);
-    if (empty($article->getErrors())) {
+    try {
       $ArticleManager->save($article);
-    } else {
-      echo($article->getErrors());
+    } catch (Exception $e) {
+      echo($e->getMessage());
+    } finally {
+      $_POST['edit'] == null;
     }
   }
 ?>

@@ -36,7 +36,8 @@ require 'lib/autoload.php';
           <?php
           foreach ($ArticleManager->getList(0, 5) as $articles => $article) {
             $author = $AuthorManager->getUnique($article->getAuthorId());
-            //$comments = $CommentManager->getByArticleId($article->getArticleId());
+            $comments = $CommentManager->getListByArticleId(-1, -1, $article->getArticleId());
+            $nbr = count($comments);
             ?>
             <div class="card blue-grey darken-1 z-depth-2">
               <div class="card-content white-text">
@@ -52,18 +53,9 @@ require 'lib/autoload.php';
                   ?>
                 </div>
                 <!-- Modal Trigger -->
-                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
-                  
-                </a>
-
-                <!-- Modal Structure -->
-                <div id="modal1" class="modal bottom-sheet">
-                  <div class="modal-content">
-                    <h5></h5>
-                    <p></p>
-                  </div>
+                <a href="#!" class="btn" onclick="Materialize.showStaggeredList('#staggered-test')"><?php $nbr > 1 ? print_r($nbr. ' commentaires.') : print_r($nbr.' commentaire.') ?></a>
                   <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
                   </div>
                 </div>
               </div>

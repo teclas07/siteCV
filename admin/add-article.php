@@ -21,14 +21,12 @@ require '../lib/autoload.php';
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
-  <!-- Compiled and minified JavaScript -->
-  <title>Blog</title>
+  <title>add article</title>
 </head>
 
 <body>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-</body>
   <main>
     <div class="row">
       <form class="col s12" action="articles.php" method="post">
@@ -52,4 +50,5 @@ require '../lib/autoload.php';
       </form>
     </div>
   </main>
+  </body>
 </html>
