@@ -62,7 +62,7 @@
                     <form class="col s12">
                       <div class="row">
                         <div class="input-field col s12">
-                          <textarea id="Comment" class="materialize-textarea"></textarea>
+                          <textarea id="Comment" class="materialize-textarea" style="color:#4db6ac"></textarea>
                           <label for="Comment">Let a comment ..</label>
                         </div>
                         <div class="input-field col s12">
@@ -77,8 +77,7 @@
                   ?>
                   <div class="card">
                    <div class="card-content">
-                     <span class="card-title"><?php print_r($User->getLogin());?></span>
-                     <p><?php print_r($comment->getContent());?></p>
+                     <p style="color:#4db6ac"><?php print_r($comment->getContent());?></p>
                    </div>
                    <div class="card-action">
                      <a href="#"><?php print_r($User->getLogin().' Posted at '.$comment->getPostTimestamp());?></a>
