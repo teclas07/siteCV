@@ -4,6 +4,7 @@ require '../lib/autoload.php';
   $db = DBFactory::getMysqlConnectionWithPDO();
   $ArticleManager = new ArticleManagerPDO($db);
   $AuthorManager = new AuthorManagerPDO($db);
+  $CategoryManager = new CategoryManagerPDO($db);
   $article = new Article();
 
   if (isset($_GET['delete'])) {
@@ -11,9 +12,17 @@ require '../lib/autoload.php';
   }
 
   if (isset($_POST['add'])) {
+    echo($_POST['category']);
+    $categoryId;
+    if (!isset($_POST['category'])) {
+      $categoryId = 0;
+    } else {
+      $categoryId = $_POST['category'];
+    }
+
     $article->setTitle($_POST['title']);
     $article->setContent($_POST['content']);
-    $article->setAuthorId(1);
+    $article->setCategoryId($categoryId);
     $article->setAuthorId(1);
 
     try {
@@ -75,6 +84,7 @@ require '../lib/autoload.php';
           <?php
             foreach ($ArticleManager->getList() as $articles => $article) {
               $author = $AuthorManager->getUnique($article->getAuthorId());
+              $category = $CategoryManager->getUnique($article->getCategoryId());
           ?>
           <tr>
             <td><?php print_r($article->getArticleId());?></td>
@@ -82,7 +92,7 @@ require '../lib/autoload.php';
             <td><?php print_r($article->getPostTimestamp());?></td>
             <td><?php print_r($article->getEditTimestamp());?></td>
             <td><?php print_r($author->getUsername());?></td>
-            <td>news</td>
+            <td><?php print_r($category->getName());?></td>
             <td><form action="add-article.php"><button class="waves-effect waves-light btn" name="edit" value="<?php print_r($article->getArticleId());?>">Edit</button></form></td>
             <td><form action="articles.php"><button class="waves-effect waves-light btn" name="delete" value="<?php print_r($article->getArticleId());?>">Delete</button></form></td>
           </tr>

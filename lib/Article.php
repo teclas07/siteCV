@@ -4,11 +4,10 @@
 							$article_id,
 							$title,
 							$content,
+							$category_id,
 							$post_timestamp,
 							$edit_timestamp,
-							$category_id,
 							$author_id;
-
 
 		const INVALID_AUTHOR = 1;
 		const INVALID_TITLE = 2;
@@ -68,12 +67,12 @@
 			$this->edit_timestamp = $editTimespam;
 		}
 
-		public function setCategoryId($categoryId) {
-			$this->category_id = $categoryId;
-		}
-
 		public function setAuthorId($authorId) {
 			$this->author_id = $authorId;
+		}
+
+		public function setCategoryId($categoryId) {
+			$this->category_id = $categoryId;
 		}
 
 		public function getErrors() {
@@ -100,12 +99,12 @@
 			return $this->edit_timestamp;
 		}
 
-		public function getCategoryId() {
-			return $this->category_id;
-		}
-
 		public function getAuthorId() {
 			return $this->author_id;
+		}
+
+		public function getCategoryId() {
+			return $this->category_id;
 		}
 	}
 ?>

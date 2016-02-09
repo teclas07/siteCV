@@ -3,6 +3,8 @@ require '../lib/autoload.php';
 
   $db = DBFactory::getMysqlConnectionWithPDO();
   $ArticleManager = new ArticleManagerPDO($db);
+  $CategoryManager = new CategoryManagerPDO($db);
+  $Categories = $CategoryManager->getList();
   $article = new Article();
 
   if(isset($_GET['edit'])) {
@@ -16,18 +18,15 @@ require '../lib/autoload.php';
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-  <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>add article</title>
 </head>
 
 <body>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <main>
+    <a href="articles.php" class="waves-effect waves-light btn">Back to articles</a>
     <div class="row">
       <form class="col s12" action="articles.php" method="post">
         <div class="row">
@@ -44,6 +43,24 @@ require '../lib/autoload.php';
         </div>
         <div class="row">
           <div class="input-field col s6">
+            <select multiple name="category">
+              <option value="" disabled selected>Choose one or more categories</option>
+              <?php
+                $index = 1;
+                foreach ($Categories as $categories => $category) {
+                  if ($category->getCategoryId() != 0) {
+              ?>
+                <option value="<?php print_r($index);?>"><?php print_r($category->getName());?></option>
+              <?php
+                  }
+                }
+              ?>
+            </select>
+            <label>Categories</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
             <button type="submit" class="waves-effect waves-light btn" name="<?php isset($_GET['edit']) ? print_r('edit'): print_r('add') ?>" value="<?php print_r($article->getArticleId());?>">Enregistrer</button>
           </div>
         </div>
@@ -51,4 +68,12 @@ require '../lib/autoload.php';
     </div>
   </main>
   </body>
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function() {
+     $('select').material_select();
+   });
+   </script>
 </html>
