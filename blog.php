@@ -22,6 +22,23 @@ require 'lib/autoload.php';
 </head>
 
 <body>
+  <header>
+    <nav>
+      <div class="nav-wrapper light-blue darken-3">
+        <ul id="nav-mobile" class="center hide-on-med-and-down">
+          <li><a href="index.html">Index</a></li>
+          <li><a href="blog.php">Blog</a></li>
+          <?php
+            if (isset($_SESSION['user'])) {
+          ?>
+              <li><a href="accout.php"><?php echo($_SESSION['User']->getLogin())?></a><?php echo($_SESSION['User']->getLogin())?></li>
+          <?php
+            }
+          ?>
+        </ul>
+      </div>
+    </nav>
+  </header>
   <div class="row">
     <div class="col s12 m6">
           <?php
