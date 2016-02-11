@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 11 Février 2016 à 07:30
+-- Généré le :  Jeu 11 Février 2016 à 07:31
 -- Version du serveur :  5.7.10
 -- Version de PHP :  5.6.17
 
@@ -23,17 +23,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Structure de la table `user_confirmation`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
-  `login` varchar(15) NOT NULL,
+CREATE TABLE `user_confirmation` (
+  `confirmation_id` int(11) NOT NULL,
+  `login` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
-  `password` varchar(128) NOT NULL,
-  `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `profile_picture_url` varchar(128) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0'
+  `token` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -41,20 +38,23 @@ CREATE TABLE `user` (
 --
 
 --
--- Index pour la table `user`
+-- Index pour la table `user_confirmation`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `user_confirmation`
+  ADD PRIMARY KEY (`confirmation_id`),
+  ADD UNIQUE KEY `login` (`login`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `token` (`token`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT pour la table `user_confirmation`
 --
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_confirmation`
+  MODIFY `confirmation_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

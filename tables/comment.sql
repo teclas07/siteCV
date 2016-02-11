@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 02 Février 2016 à 18:36
+-- Généré le :  Jeu 11 Février 2016 à 07:29
 -- Version du serveur :  5.7.10
 -- Version de PHP :  5.6.17
 
@@ -32,7 +32,7 @@ CREATE TABLE `comment` (
   `user_id` int(11) NOT NULL,
   `content` varchar(255) NOT NULL,
   `post_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `edit_timestamp` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP
+  `edit_timestamp` timestamp NULL DEFAULT NULL, ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --

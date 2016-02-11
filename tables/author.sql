@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 02 Février 2016 à 18:36
+-- Généré le :  Jeu 11 Février 2016 à 07:28
 -- Version du serveur :  5.7.10
 -- Version de PHP :  5.6.17
 
@@ -30,7 +30,8 @@ CREATE TABLE `author` (
   `author_id` int(11) NOT NULL,
   `username` varchar(25) NOT NULL,
   `password` char(32) NOT NULL,
-  `biography` text NOT NULL
+  `biography` text NOT NULL,
+  `profil_picture_url` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --

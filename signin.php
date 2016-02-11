@@ -1,5 +1,6 @@
 <?php
   require './lib/autoload.php';
+  session_start();
   $db = DBFactory::getMysqlConnectionWithPDO();
   $UserManager = new UserManagerPDO($db);
 
@@ -9,10 +10,7 @@
 
     if ($User != false) {
       if ($User->getPassword() == md5($_POST['password'])) {
-        session_start();
-
         $_SESSION['User'] = $User;
-        echo('connecté.');
       } else {
         unset($User);
         echo('Mauvais mot de passe.');
@@ -41,13 +39,7 @@
           <ul id="nav-mobile" class="center hide-on-med-and-down">
             <li><a href="index.html">Index</a></li>
             <li><a href="blog.php">Blog</a></li>
-            <?php
-              if (isset($_SESSION['user'])) {
-            ?>
-                <li><a href="accout.php"><?php echo($_SESSION['User']->getLogin())?></a><?php echo($_SESSION['User']->getLogin())?></li>
-            <?php
-              }
-            ?>
+            <li><a href="#"><?php if(isset($_SESSION['User'])) { print_r($_SESSION['User']->getLogin()); }?></a></li>
           </ul>
         </div>
       </nav>
