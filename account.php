@@ -7,19 +7,19 @@ if(! empty($_GET['url']))
         $url = $_GET['url'];
     }
     else {
-        $url = 'signup';
+        $url = 'account';
     }
 require_once "public/includes/header".EXT;
 require_once "public/includes/navigation".EXT;
 
 switch ($url) {
 
-    case 'signup':
-        include PATH.'signup'.EXT;
+    case 'account':
+        include PATH.'account'.EXT;
     break;
 
     default:
-        header("Location: signup.php?url=signup");
+        header("Location: account.php?url=account");
     break;
 }
 require_once "public/includes/footer".EXT;
