@@ -35,7 +35,9 @@ switch ($url) {
     break;
 
     case 'logout':
-      include PATH_FN.'logout'.EXT;
+      session_start();
+      session_unset($_SESSION['User']);
+      session_destroy();
       header("Location: index.php");
     break;
 

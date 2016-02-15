@@ -4,7 +4,7 @@
     <h4 style="color:white">Romain Margheriti</h4>
     <h5 style="color:white">Programmer</h5>
   </div>
-
+<hr>
   <div id="me" class="left-align">
     <div id="profil">
       <h5><i class="material-icons">face</i>PROFILE</h5>

@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-content">
           <div class="row">
-            <form class="col s12" action="action.php?focus=signup" method="POST">
+            <form id="form" class="col s12" action="action.php?focus=signup" method="POST" novalidate="novalidate">
               <h4 style="color:#4db6ac">Inscrivez-vous</h4>
               <div class="row">
                 <div class="input-field col s12">

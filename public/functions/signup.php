@@ -29,7 +29,6 @@
 
       foreach ($Errors as $errors => $error) {
         array_push($ErrorsValue, $error, $User->getError($error));
-        echo($User->getError($error));
       }
     }
   }
