@@ -1,5 +1,5 @@
 <?php
-require '../lib/autoload.php';
+require '../config.php';
 
   $db = DBFactory::getMysqlConnectionWithPDO();
   $ArticleManager = new ArticleManagerPDO($db);

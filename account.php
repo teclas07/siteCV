@@ -1,5 +1,4 @@
 <?php
-
 define("EXT", ".php");
 define("PATH", "public/");
 if(! empty($_GET['url']))
@@ -9,19 +8,20 @@ if(! empty($_GET['url']))
     else {
         $url = 'account';
     }
-require_once "public/includes/header".EXT;
-require_once "public/includes/navigation".EXT;
 
-switch ($url) {
+  require_once "public/includes/header".EXT;
+  require_once "public/includes/navigation".EXT;
 
-    case 'account':
-        include PATH.'account'.EXT;
-    break;
+  switch ($url) {
 
-    default:
-        header("Location: account.php?url=account");
-    break;
-}
-require_once "public/includes/footer".EXT;
+      case 'account':
+          include PATH.'account'.EXT;
+      break;
+
+      default:
+          header("Location: account.php?url=account");
+      break;
+  }
+  require_once "public/includes/footer".EXT;
 
 ?>
