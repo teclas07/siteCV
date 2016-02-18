@@ -1,27 +1,47 @@
-body {
-   display: flex;
-   min-height: 100vh;
-   flex-direction: column;
- }
-
- main {
-   flex: 1 0 auto;
- }
-
-#leftSide
+body
 {
-  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-#leftSide i
+main
+{
+  flex: 1 0 auto;
+}
+
+/*** CV PAGE ***/
+
+#content i
 {
   vertical-align:middle;
   margin-right: 20px;
-  color:#29b6f6;
-  background-color:white;
+  padding: 5px 5px 5px 5px;
   border-top-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-size:40px;
+}
+
+#content #left_side i
+{
+  color:#29b6f6;
+  background-color:white;
+}
+
+#content #left_side img
+{
+  margin-top: 15px;
+}
+
+#content #center i
+{
+  color:white;
+  background-color:#29b6f6;
+}
+
+#center h4
+{
+    color: #29b6f6;
 }
 
 .skillbar {
@@ -97,42 +117,4 @@ width:110px;
 	color:rgba(0, 0, 0, 0.4);
 }
 
-#leftSide #me
-{
-  margin-left: 25px;
-  color: white;
-}
-
-#rightSide
-{
-  overflow:auto;
-}
-
-#rightSide i
-{
-  color:white;
-  vertical-align:middle;
-  margin-right: 20px;
-  background-color:#29b6f6;
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding-right: 5px;
-  font-size: 50px;
-}
-
-#rightSide h4
-{
-    color: #29b6f6;
-}
-
-#rightSide #content
-{
-  margin-left: 50px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
-
-#socialBar
-{
-  text-align: center;
-}
+/*** END CV PAGE ***/

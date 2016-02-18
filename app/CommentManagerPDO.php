@@ -29,39 +29,31 @@ class CommentManagerPDO extends CommentManager
     $this->db->exec('DELETE FROM comment WHERE comment_id = '.(int) $comment_id);
   }
 
-  public function getList($begin = -1, $limit = -1)
+  public function getList($where = 'comment_id', $value = null, $begin = -1, $limit = -1)
   {
-    $sql = 'SELECT article_id, comment_id, user_id, content, post_timestamp, edit_timestamp FROM comment ORDER BY comment_id DESC';
+    $sql = 'SELECT article_id, comment_id, user_id, content, post_timestamp, edit_timestamp FROM comment ';
 
+    if (strcmp($where, 'comment_id') != 0) {
+      $sql .= ' WHERE '.$where;
+      if (is_string($value)) {
+        $sql .= ' LIKE :'.$where;
+      } else {
+        $sql .= ' = :'.$where;
+      }
+    }
+
+    $sql .= ' ORDER BY comment_id DESC';
 
     if ($begin != -1 || $limit != -1)
     {
       $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $begin;
     }
 
-    $query = $this->db->query($sql);
-    $test = $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
+    $query = $this->db->prepare($sql);
+    $query->bindValue(':'.$where, $value);
 
-    $listeComment = $query->fetchAll();
-
-    $query->closeCursor();
-
-    return $listeComment;
-  }
-
-  public function getListByArticleId($begin = -1, $limit = -1, $articleId)
-  {
-    $sql = 'SELECT article_id, comment_id, user_id, content, post_timestamp, edit_timestamp FROM comment WHERE article_id = '.$articleId.' ORDER BY comment_id DESC';
-
-
-    if ($begin != -1 || $limit != -1)
-    {
-      $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $begin;
-    }
-
-    $query = $this->db->query($sql);
-    $test = $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
-
+    $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
+    $query->execute();
     $listeComment = $query->fetchAll();
 
     $query->closeCursor();
@@ -74,7 +66,7 @@ class CommentManagerPDO extends CommentManager
     $sql = 'SELECT comment_id, article_id, user_id, content, post_timestamp, edit_timestamp FROM comment ORDER BY comment_id DESC';
 
     $query = $this->db->query($sql);
-    $test = $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
+    $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
 
     $listeComment = $query->fetchAll();
 

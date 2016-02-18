@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 define("EXT", ".php");
 define("PATH", "public/");
 if(! empty($_GET['url']))

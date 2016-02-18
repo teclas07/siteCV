@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+session_start();
 define("EXT", ".php");
 define("PATH_FN", "public/functions/");
 if(! empty($_GET['focus']))

@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+session_start();
 define("EXT", ".php");
 define("PATH", "public/");
 if(! empty($_GET['url']))
@@ -23,5 +24,13 @@ switch ($url) {
     break;
 }
 require_once "public/includes/footer".EXT;
-
 ?>
+<script>
+  jQuery(document).ready(function(){
+   jQuery('.skillbar').each(function(){
+     jQuery(this).find('.skillbar-bar').animate({
+       width:jQuery(this).attr('data-percent')
+     },6000);
+   });
+ });
+</script>

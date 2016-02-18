@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <header>
   <nav>
     <div class="nav-wrapper light-blue darken-3">
